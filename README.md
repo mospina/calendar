@@ -1,3 +1,17 @@
+# Calendar
+
+## Design steps
+
+- Specification
+  - REQUIRES: preconditions for correctness
+  - MODIFIES: what does it change?
+  - EFFECTS: What does the method do?
+- Usage scenarios
+- Test specifications
+- Implementation
+
+## Commands to setup and work on JS/react
+
 > create-react-app calendar
 > cd calendar/
 
