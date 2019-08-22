@@ -16,7 +16,7 @@ describe('Entry setters', () => {
     expect(entry._date.getHours()).toBe(10);
     expect(entry._label).not.toBeDefined();
     expect(entry._interval).not.toBeDefined();
-    expect(entry._reminder).not.toBeDefined();
+    expect(entry._repeat).not.toBeDefined();
   }
 
   it('date set date using time from existing date', () => {
@@ -39,10 +39,10 @@ describe('Entry setters', () => {
     expect(entry._label).toBeDefined();
   });  
 
-  it('reminder set reminder', () => {
+  it('repeat set repeat', () => {
     checkInitialState();
-    entry.reminder = true;
-    expect(entry._reminder).toBeDefined();
+    entry.repeat = true;
+    expect(entry._repeat).toBeDefined();
   });
 
   it('interval set interval', () => {
@@ -58,7 +58,7 @@ describe('Entry getters', () => {
   function setInitialState() {
     entry.label = 'A special day';
     entry.interval = 'monthly';
-    entry.reminder = true;
+    entry.repeat = true;
   }
 
   it('date get date as string', () => {
@@ -78,9 +78,9 @@ describe('Entry getters', () => {
     expect(entry.label).toBe('A special day');
   });  
 
-  it('reminder get reminder', () => {
+  it('repeat get repeat', () => {
     setInitialState();
-    expect(entry.reminder).toBe(true);
+    expect(entry.repeat).toBe(true);
   });
 
   it('interval set interval', () => {

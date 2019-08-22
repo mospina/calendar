@@ -6,7 +6,7 @@ class Entry {
 
    _date : Date
    _label : string
-   _reminder: boolean
+   _repeat: boolean
    _interval: Interval
 
   // REQUIRES: date and time are in ISO format 'YYYY-MM-DD' 'HH:MM'
@@ -43,9 +43,9 @@ class Entry {
     return this._interval;
   };
 
-  // EFFECTS: returns reminder
-  get reminder(): boolean{
-    return this._reminder;
+  // EFFECTS: returns repeat
+  get repeat(): boolean{
+    return this._repeat;
   };
 
   // REQUIRES: date to be in ISO format 'YYYY-MM-DD'
@@ -76,9 +76,9 @@ class Entry {
     this._interval = interval;
   };
 
-  // EFFECTS: returns reminder
-  set reminder(reminder: boolean): void{
-    this._reminder = reminder;
+  // EFFECTS: returns repeat
+  set repeat(repeat: boolean): void{
+    this._repeat = repeat;
   };
 
   // EFFECTS: returns a string with a leading zero if number is one single digit
