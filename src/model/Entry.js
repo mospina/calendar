@@ -1,5 +1,7 @@
 // @flow
 
+import {DateUtils} from '../utils/DateUtils.js';
+
 type Interval = 'daily' | 'weekly' | 'monthly' | 'annually';
 
 class Entry {
@@ -17,20 +19,18 @@ class Entry {
   };
 
   // EFFECTS: returns date without time
-  get date(): string{
-    let year = this._date.getFullYear();
-    let month = this._date.getMonth() + 1;
-    let day = this._date.getDate();
+  get fullDate(): Date{
+    return this._date;
+  };
 
-    return year + "-" + this.leadingZero(month) + "-" + this.leadingZero(day)
+  // EFFECTS: returns date without time
+  get date(): string{
+    return DateUtils.toDate(this._date);
   };
 
   // EFFECTS: returns time without date
   get time(): string{
-    let hours = this._date.getHours();
-    let minutes = this._date.getMinutes();
-    
-    return this.leadingZero(hours) + ":" + this.leadingZero(minutes)
+    return DateUtils.toTime(this._date);
   };
 
   // EFFECTS: returns label
@@ -80,15 +80,6 @@ class Entry {
   set repeat(repeat: boolean): void{
     this._repeat = repeat;
   };
-
-  // EFFECTS: returns a string with a leading zero if number is one single digit
-  leadingZero(number: number): string{
-    let n = number.toString();
-    if (n.length == 1) {
-      return "0" + n;
-    }
-    return n;
-  }
 }
 
 export { Entry };
