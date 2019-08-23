@@ -29,17 +29,15 @@ class Meeting extends Event{
   // MODIFIES: this
   // EFFECTS: remove attendee from the list
   removeAttendee(attendee: string): void{
-    let temp = [];
-    this._attendees.reduce(
+    this._attendees = this._attendees.reduce(
       (acc, item) => {
         if (item != attendee) {
           acc.push(item)
         }
         return acc
       }, 
-      temp
+      []
     )
-    this._attendees = temp
   };
 
   // REQUIRES: a function that received an email as argument
