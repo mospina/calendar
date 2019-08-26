@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import {EmailForm} from './components/EmailForm'
+import {Calendar as CalendarWidget} from './components/Calendar';
 import {Calendar} from './model/Calendar'
-
-function DateTime() {
-  const today = new Date();
-  
-  return (
-    <h3>{today.toString()}</h3>
-  )
-}
 
 class App extends Component {
 
@@ -42,7 +35,7 @@ class App extends Component {
       <div className="App">
         <h2>Calendar</h2>
         { calendar
-          ? <DateTime />
+          ? <CalendarWidget calendar={calendar} />
           : <EmailForm
               value={email}
               onChange={this.onEmailFormChange}
