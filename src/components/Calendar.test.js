@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Calendar as CalendarWidget} from './Calendar';
+import {CalendarWidget} from './Calendar';
 import {Calendar} from '../model/Calendar';
 
 describe('Calendar component', () => {

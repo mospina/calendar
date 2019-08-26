@@ -1,6 +1,13 @@
-import React, { Component } from 'react';
+// @flow
 
-class Calendar extends Component {
+import React, { Component } from 'react';
+import {Calendar} from '../model/Calendar';
+
+type Props = {
+  calendar : Calendar
+}
+
+class CalendarWidget extends Component<Props> {
 
   render(){
     const {calendar} = this.props;
@@ -11,4 +18,4 @@ class Calendar extends Component {
   }
 }
 
-export {Calendar};
+export {CalendarWidget};

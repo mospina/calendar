@@ -1,27 +1,33 @@
+// @flow
+
 import React, { Component } from 'react';
 import './App.css';
 import {EmailForm} from './components/EmailForm'
-import {Calendar as CalendarWidget} from './components/Calendar';
+import {CalendarWidget} from './components/Calendar';
 import {Calendar} from './model/Calendar'
 
-class App extends Component {
+type Props = {}
 
-  constructor(props){
+type State = {
+  email : string,
+  calendar : ?Calendar
+}
+
+class App extends Component<Props, State> {
+
+  constructor(props: Props){
     super(props);
     this.state = {
       email: '',
       calendar: null
     };
-    
-    this.onEmailFormChange = this.onEmailFormChange.bind(this);
-    this.onEmailFormSubmit = this.onEmailFormSubmit.bind(this);
   }
 
-  onEmailFormChange(event){
-    this.setState({email: event.target.value});
+  onEmailFormChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({email: event.currentTarget.value});
   }
 
-  onEmailFormSubmit(event){
+  onEmailFormSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     const {email} = this.state;
     this.setState({calendar: new Calendar(email)});
 
