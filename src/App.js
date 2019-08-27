@@ -38,8 +38,8 @@ class App extends Component<Props, State> {
     const { email, calendar } = this.state;
 
     return (
-      <div className="App">
-        <h2>Calendar</h2>
+      <div id="App">
+        <h1>Calendar</h1>
         { calendar
           ? <CalendarWidget calendar={calendar} />
           : <EmailForm
