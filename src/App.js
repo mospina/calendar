@@ -39,7 +39,7 @@ class App extends Component<Props, State> {
       const {calendar} = this.state;
       calendar.updateDate();
       this.setState({ calendar: calendar });
-    }, 1000);
+    }, 30000);
 
     event.preventDefault();
   };
