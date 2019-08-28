@@ -23,6 +23,10 @@ class App extends Component<Props, State> {
     };
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   onEmailFormChange = (event: SyntheticEvent<HTMLInputElement>) => {
     this.setState({email: event.currentTarget.value});
   }
@@ -30,6 +34,12 @@ class App extends Component<Props, State> {
   onEmailFormSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     const {email} = this.state;
     this.setState({calendar: new Calendar(email)});
+
+    this.interval = setInterval(() => {
+      const {calendar} = this.state;
+      calendar.updateDate();
+      this.setState({ calendar: calendar });
+    }, 1000);
 
     event.preventDefault();
   };
