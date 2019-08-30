@@ -2,11 +2,12 @@
 
 import React, { Component } from 'react';
 import {Entry} from '../model/Entry';
+import {EventForm, MeetingForm, ReminderForm} from './EntryFormTypes';
 
 type EntryType = null | 'event' | 'meeting' | 'reminder';
 
 type Props = {
-  addEntry : (Entry) => void
+  addEntry : (Entry)=>void
 }
 
 type State = {
@@ -22,8 +23,8 @@ class EntryForm extends Component<Props, State> {
     }
   }
 
-  runAddEntry = (fn: (Entry)=>void) => {
-    const entry = new Entry('2019-08-28', '10:00');
+  runAddEntry = (entry : Entry, fn : (Entry)=>void) => {
+    this.setState({entryType: null});
     fn(entry);
   }
 
@@ -33,14 +34,14 @@ class EntryForm extends Component<Props, State> {
     event.preventDefault();
   }
 
-  selectFormComponent = (entryType: EntryType) => {
+  selectFormComponent = (entryType: EntryType, addEntryFn : (Entry)=>void) => {
     switch (entryType) {
     case 'event':
       return (<EventForm />);
     case 'meeting':
       return (<MeetingForm />);
     case 'reminder':
-      return (<ReminderForm />);
+      return (<ReminderForm createEntry={(entry) => this.runAddEntry(entry, addEntryFn)} />);
     default:
       return (<div></div>);
     }
@@ -71,22 +72,13 @@ class EntryForm extends Component<Props, State> {
             type="button">
               Add Reminder
           </button>
-          <button 
-            onClick={() => this.runAddEntry(addEntry)}
-            type="button">
-              Add entry
-          </button>
         </div>
         <div className="form">
-        { this.selectFormComponent(entryType) }
+        { this.selectFormComponent(entryType, addEntry) }
         </div>
       </div>
     );
   }; 
 }
-
-const EventForm = (props) => (<div>Event</div>)
-const MeetingForm = (props) => (<div>Meeting</div>)
-const ReminderForm = (props) => (<div>Reminder</div>)
 
 export {EntryForm};
