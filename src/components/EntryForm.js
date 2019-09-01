@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import {Entry} from '../model/Entry';
-import {EventForm, MeetingForm, ReminderForm} from './EntryFormTypes';
+import {EventForm} from './EventForm';
+import {MeetingForm} from './MeetingForm';
+import {ReminderForm} from './ReminderForm';
 
 type EntryType = null | 'event' | 'meeting' | 'reminder';
 
