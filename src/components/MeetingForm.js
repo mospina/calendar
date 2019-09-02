@@ -20,7 +20,7 @@ type state = {
 
 class MeetingForm extends Component<Props, State> {
 
-  constructor(props: ReminderProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       date: '',
