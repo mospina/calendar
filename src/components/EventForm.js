@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import {Event} from '../model/Event';
+import {Reminder} from '../model/Reminder';
 import {Input, Checkbox, Select} from './Widgets';
+import {DateUtils} from '../utils/DateUtils';
 
 type Interval = 'daily' | 'weekly' | 'monthly' | 'annually';
 
@@ -15,19 +17,22 @@ type State = {
   time : string,
   label : string,
   interval : Interval,
-  repeat : boolean
+  repeat : boolean,
+  addReminder: boolean,
+  reminder : ?Reminder
 }
 
 class EventForm extends Component<Props, State> {
 
-  constructor(props: ReminderProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       date: '',
       time: '',
       label: '',
       repeat: false,
-      interval: 'daily'
+      interval: 'daily',
+      addReminder: false
     }
   }
 
@@ -38,6 +43,12 @@ class EventForm extends Component<Props, State> {
     entry.label = this.state.label;
     entry.repeat = this.state.repeat;
     entry.interval = this.state.interval;
+    if (this.state.addReminder) {
+      entry.reminder = new Reminder(
+        this.state.date, 
+        DateUtils.subtractTime(this.state.time, '01:00')
+      );
+    }
     fn(entry);
 
     event.preventDefault();
@@ -63,8 +74,12 @@ class EventForm extends Component<Props, State> {
     this.setState({interval: event.currentTarget.value });
   }
 
+  onAddReminderChange = (event : SyntheticEvent<HTMLInputElement>) => {
+    this.setState({addReminder: event.currentTarget.checked});
+  }
+
   render() {
-    const {date, time, label, repeat, interval} = this.state;
+    const {date, time, label, repeat, interval, addReminder} = this.state;
     const {createEntry} = this.props;
 
     return (
@@ -94,6 +109,11 @@ class EventForm extends Component<Props, State> {
           value={interval}
           onChange={this.onIntervalChange}
           options={['daily', 'weekly', 'monthly', 'annually']}
+        />
+        <Checkbox
+          label="Add reminder"
+          value={addReminder}
+          onChange={this.onAddReminderChange}
         />
         <button type="submit">Add Event</button>
       </form>
