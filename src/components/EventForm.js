@@ -18,8 +18,7 @@ type State = {
   label : string,
   interval : Interval,
   repeat : boolean,
-  addReminder: boolean,
-  reminder : ?Reminder
+  addReminder: boolean
 }
 
 class EventForm extends Component<Props, State> {

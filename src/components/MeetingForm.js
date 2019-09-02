@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import {Meeting} from '../model/Meeting';
-import {Input, Checkbox, Select} from './Widgets';
+import {Reminder} from '../model/Reminder';
+import {DateUtils} from '../utils/DateUtils';
+import {Input, Checkbox, Select, Textarea} from './Widgets';
 
 type Interval = 'daily' | 'weekly' | 'monthly' | 'annually';
 
@@ -15,7 +17,9 @@ type state = {
   time : string,
   label : string,
   interval : Interval,
-  repeat : boolean
+  repeat : boolean,
+  addReminder: boolean,
+  attendees : string
 }
 
 class MeetingForm extends Component<Props, State> {
@@ -27,17 +31,31 @@ class MeetingForm extends Component<Props, State> {
       time: '',
       label: '',
       repeat: false,
-      interval: 'daily'
+      interval: 'daily',
+      addReminder: false,
+      attendees: ''
     }
   }
 
   // REQUIRES: a function that received an entry
   // EFFECTS: Create an Reminder entry and call the function with the entry
   onSubmit = (fn : (Entry) => void, event : SyntheticEvent<HTMLFormElement>) => {
-    const entry = new MeetingForm(this.state.date, this.state.time);
+    const entry = new Meeting(this.state.date, this.state.time);
     entry.label = this.state.label;
     entry.repeat = this.state.repeat;
     entry.interval = this.state.interval;
+
+    if (this.state.addReminder) {
+      entry.reminder = new Reminder(
+        this.state.date, 
+        DateUtils.subtractTime(this.state.time, '01:00')
+      );
+    }
+    
+    for (let attendee of this.state.attendees.split(',')) { 
+      entry.addAttendee(attendee.trim());
+    }
+
     fn(entry);
 
     event.preventDefault();
@@ -63,8 +81,16 @@ class MeetingForm extends Component<Props, State> {
     this.setState({interval: event.currentTarget.value });
   }
 
+  onAddReminderChange = (event : SyntheticEvent<HTMLInputElement>) => {
+    this.setState({addReminder: event.currentTarget.checked});
+  }
+
+  onAttendeesChange = (event : SyntheticEvent<HTMLTextareaElement>) => {
+    this.setState({attendees: event.currentTarget.value});
+  }
+
   render() {
-    const {date, time, label, repeat, interval} = this.state;
+    const {date, time, label, repeat, interval, addReminder, attendees} = this.state;
     const {createEntry} = this.props;
 
     return (
@@ -94,6 +120,16 @@ class MeetingForm extends Component<Props, State> {
           value={interval}
           onChange={this.onIntervalChange}
           options={['daily', 'weekly', 'monthly', 'annually']}
+        />
+        <Checkbox
+          label="Add reminder"
+          value={addReminder}
+          onChange={this.onAddReminderChange}
+        />
+        <Textarea
+          label="Attendees"
+          value={attendees}
+          onChange={this.onAttendeesChange}
         />
         <button type="submit">Add Meeting</button>
       </form>
