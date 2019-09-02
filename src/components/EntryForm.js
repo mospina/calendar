@@ -39,9 +39,9 @@ class EntryForm extends Component<Props, State> {
   selectFormComponent = (entryType: EntryType, addEntryFn : (Entry)=>void) => {
     switch (entryType) {
     case 'event':
-      return (<EventForm />);
+      return (<EventForm createEntry={(entry) => this.runAddEntry(entry, addEntryFn)} />);
     case 'meeting':
-      return (<MeetingForm />);
+      return (<MeetingForm createEntry={(entry) => this.runAddEntry(entry, addEntryFn)} />);
     case 'reminder':
       return (<ReminderForm createEntry={(entry) => this.runAddEntry(entry, addEntryFn)} />);
     default:
