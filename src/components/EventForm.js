@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import {Entry} from '../model/Entry';
 import {Event} from '../model/Event';
 import {Reminder} from '../model/Reminder';
 import {Input, Checkbox, Select} from './Widgets';

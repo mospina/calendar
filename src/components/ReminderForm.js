@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import {Entry} from '../model/Entry';
 import {Reminder} from '../model/Reminder';
 import {Input, Checkbox, Select, Textarea} from './Widgets';
 
@@ -66,7 +67,7 @@ class ReminderForm extends Component<Props, State> {
     this.setState({interval: event.currentTarget.value });
   }
 
-  onNoteChange = (event : SyntheticEvent<HTMLTextareaElement>) => {
+  onNoteChange = (event : SyntheticEvent<HTMLTextAreaElement>) => {
     this.setState({note: event.currentTarget.value });
   }
 

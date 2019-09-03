@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import {Entry} from '../model/Entry';
 import {Meeting} from '../model/Meeting';
 import {Reminder} from '../model/Reminder';
 import {DateUtils} from '../utils/DateUtils';
@@ -12,7 +13,7 @@ type Props = {
   createEntry : (Entry)=>void
 }
 
-type state = {
+type State = {
   date : string,
   time : string,
   label : string,
@@ -85,7 +86,7 @@ class MeetingForm extends Component<Props, State> {
     this.setState({addReminder: event.currentTarget.checked});
   }
 
-  onAttendeesChange = (event : SyntheticEvent<HTMLTextareaElement>) => {
+  onAttendeesChange = (event : SyntheticEvent<HTMLTextAreaElement>) => {
     this.setState({attendees: event.currentTarget.value});
   }
 

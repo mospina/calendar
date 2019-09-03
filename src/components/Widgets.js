@@ -45,13 +45,13 @@ function Checkbox(props : CheckboxProps) {
 }
 
 type SelectProps = 
-  { value : boolean, 
+  { value : string, 
     onChange : (SyntheticEvent<HTMLSelectElement>)=>void, 
     label : string,
     options : Array<string>
   }
 
-function Select(props : CheckboxProps) { 
+function Select(props : SelectProps) { 
   const { value, onChange, label, options} = props;
 
   return (
@@ -70,11 +70,11 @@ function Select(props : CheckboxProps) {
 
 type TextareaProps = 
   { value : string, 
-    onChange : (SyntheticEvent<HTMLTextareaElement>)=>void, 
+    onChange : (SyntheticEvent<HTMLTextAreaElement>)=>void, 
     label : string
   }
 
-function Textarea(props : CheckboxProps) { 
+function Textarea(props : TextareaProps) { 
   const { value, onChange, label} = props;
 
   return (
