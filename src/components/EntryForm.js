@@ -6,14 +6,14 @@ import {EventForm} from './EventForm';
 import {MeetingForm} from './MeetingForm';
 import {ReminderForm} from './ReminderForm';
 
-type EntryType = null | 'event' | 'meeting' | 'reminder';
+type EntryType = '' | 'event' | 'meeting' | 'reminder';
 
 type Props = {
   addEntry : (Entry)=>void
 }
 
 type State = {
-  entryType : ?EntryType
+  entryType : EntryType
 }
 
 class EntryForm extends Component<Props, State> {
@@ -21,12 +21,12 @@ class EntryForm extends Component<Props, State> {
   constructor(props: Props){
     super(props);
     this.state = {
-      entryType: null
+      entryType: ''
     }
   }
 
   runAddEntry = (entry : Entry, fn : (Entry)=>void) => {
-    this.setState({entryType: null});
+    this.setState({entryType: ''});
     fn(entry);
   }
 
