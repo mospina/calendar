@@ -25,6 +25,35 @@ class DateUtils {
     }
     return n;
   }
+  
+  // REQUIRES: time and minus to be of the form 'HH:MM'
+  // EFFECTS: returns a string representing the given time minus the "minus" time
+  static subtractTime(time : string, minus : string): string {
+    let timeTotal = this.timeToMinutes(time);
+    let minusTotal = this.timeToMinutes(minus);
+
+    if (!timeTotal){
+      return ''
+    }
+
+    if (!minusTotal) {
+      return time
+    }
+
+    return this.minutesTotime(timeTotal - minusTotal);
+  }
+
+  static timeToMinutes(time : string): number {
+    let timeArray = time.split(':').map((s) => parseInt(s, 10));
+    return (timeArray[0] * 60) + timeArray[1];
+  }
+
+  static minutesTotime(minutes : number): string {
+    let quotient = Math.floor(minutes/60);
+    let remainder = minutes % 60;
+
+    return this.leadingZero(quotient) + ':' + this.leadingZero(remainder);
+  }
 }
 
 export {DateUtils};
