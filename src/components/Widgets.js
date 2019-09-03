@@ -13,7 +13,7 @@ function Input(props : InputProps) {
 
   return (
     <div>
-      <label for={label}>{label}:</label>
+      <label htmlFor={label}>{label}:</label>
       <input 
         type="text"
         value={value}
@@ -34,7 +34,7 @@ function Checkbox(props : CheckboxProps) {
 
   return (
     <div>
-      <label for={label}>{label}:</label>
+      <label htmlFor={label}>{label}:</label>
       <input 
         type="checkbox"
         checked={value}
@@ -56,10 +56,10 @@ function Select(props : CheckboxProps) {
 
   return (
     <div>
-      <label for={label}>{label}:</label>
+      <label htmlFor={label}>{label}:</label>
       <select value={value} onChange={onChange}>
       { options.map((item) => (
-          <option value={item}>{item}</option> 
+          <option key={item} value={item}>{item}</option> 
           )
         )
       }
@@ -79,7 +79,7 @@ function Textarea(props : CheckboxProps) {
 
   return (
     <div>
-      <label for={label}>{label}:</label>
+      <label htmlFor={label}>{label}:</label>
       <textarea value={value} onChange={onChange} />
     </div>
   );
