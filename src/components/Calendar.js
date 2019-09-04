@@ -24,9 +24,9 @@ class CalendarWidget extends Component<Props> {
           <h3>Today</h3>
           <EntryList entries={calendar.getTodayEntries()} />
         </div>
+        <div className="entry-list">
           <h3>This week</h3>
           <EntryList entries={calendar.getThisWeekEntries()} />
-        <div className="entry-list">
         </div>
       </div>
     )
