@@ -19,9 +19,6 @@ class EntryList extends Component<Props> {
             <td>{entry.date}</td>
             <td>{entry.time}</td>
             <td>{entry.label}</td>
-            {
-              // TODO: <td><button>details</button></td> 
-            }
           </tr>
         )
       }
